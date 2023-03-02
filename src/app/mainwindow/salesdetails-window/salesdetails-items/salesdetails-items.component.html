@@ -1,0 +1,28 @@
+<ul class="menu-list" style="overflow-y:auto ;height: 200px;">
+  <li class="newclass :hover" *ngFor="let item of inventoryis" >
+    <a class="btn" href="#"><span>Name  : {{item.name}}</span><br><span>Batch Id  : {{item.batchId}}</span></a>
+
+  </li>
+
+</ul>
+
+<style>
+  .menu-list{
+
+    border-radius: 2px;
+    width: 100%;
+    display: block;
+    padding: 10px;
+    }
+    .btn{
+      width: 100%;
+      color:hsl(0, 0%, 21%);
+      background-color: hsl(0, 0%, 88%);
+      border-radius: 3px;
+    }
+    .newclass :hover{
+      background-color: hsl(0, 0%, 21%);
+      color: hsl(0, 0%, 88%);
+    }
+
+</style>

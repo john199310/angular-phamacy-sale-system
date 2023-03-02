@@ -1,0 +1,135 @@
+<div style="overflow-y:auto ;overflow-x: hidden;height: 900px;">
+
+
+  <div class="spinner-box loadCenter" *ngIf="isLoading">
+    <div class="configure-border-1">
+      <div class="configure-core"></div>
+    </div>
+    <div class="configure-border-2">
+      <div class="configure-core"></div>
+    </div>
+  </div>
+
+
+<form [formGroup]="form" (submit)="onAddSupplier()"  *ngIf="!isLoading">
+
+
+  <div class="field">
+    <label class="label" >SUPPLIER ID</label>
+    <input type="text" class="is-center input" formControlName="supplierID"   style="width: 100%;" placeholder="19283838"  >
+    <!-- <span class="error-msg" *ngIf="(registerFormControl.supplierID.touched ) && registerFormControl.supplierID.errors?.required">
+      *Supplier ID is required
+    </span> -->
+    <div class="error-msg" *ngIf="registerFormControl.supplierID.errors && (registerFormControl.supplierID.dirty || registerFormControl.supplierID.touched)">
+      <p *ngIf="registerFormControl.supplierID.errors.required">*Supplier ID number is required</p>
+      <p *ngIf="registerFormControl.supplierID.errors.pattern">*The Supplier ID number should have 9 digits and  'V' at the end </p>
+      <!-- <p *ngIf="registerFormControl.supplierID.errors.minLength">*The Supplier ID number should have 10 values  </p>
+      <p *ngIf="registerFormControl.supplierID.errors.maxLength">*The Supplier ID number should have 10 values </p> -->
+
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label" >NAME</label>
+    <input type="text" class="is-center input" formControlName="name" style="width: 100%;" placeholder="Mr S M Bandara" />
+    <span class="error-msg" *ngIf="(registerFormControl.name.touched ) && registerFormControl.name.errors?.required">
+      *Name is required
+    </span>
+  </div>
+
+  <div class="field">
+    <label class="label" >EMAIL</label>
+    <input type="email" class="is-center input"  formControlName="email" style="width: 100%;" placeholder="xxx@gmail.com" />
+    <!-- <span class="error-msg" *ngIf="(registerFormControl.email.touched ) && registerFormControl.email.errors?.required">
+      *Email is required
+    </span> -->
+    <div class="error-msg" *ngIf="registerFormControl.email.errors && (registerFormControl.email.dirty || registerFormControl.email.touched)">
+      <p *ngIf="registerFormControl.email.errors.required">*Email is required</p>
+      <p *ngIf="registerFormControl.email.errors.pattern">*The email address must contain at least the @ character</p>
+      <p *ngIf="registerFormControl.email.errors.emailDomain">*Email must contain .com at the end </p>
+    </div>
+
+  </div>
+
+  <div class="field">
+    <label class="label">CONTACT</label>
+    <input type="text" class="is-center input"   formControlName="contact" style="width: 100%;" placeholder="071xxxxxxx" />
+    <!-- <span class="error-msg" *ngIf="(registerFormControl.contact.touched ) && registerFormControl.contact.errors?.required">
+      *Contact number is required
+    </span> -->
+    <div class="error-msg" *ngIf="registerFormControl.contact.errors && (registerFormControl.contact.dirty || registerFormControl.contact.touched)">
+      <p *ngIf="registerFormControl.contact.errors.required">*Contact number is required</p>
+      <p *ngIf="registerFormControl.contact.errors.pattern">*The contact number should have 10 digits </p>
+
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">DRUGS AVAILABLE</label>
+    <input type="text" class="is-center input"   formControlName="drugsAvailable"  style="width: 100%;" placeholder="Penadol, Dalcolax" />
+    <span class="error-msg" *ngIf="(registerFormControl.drugsAvailable.touched ) && registerFormControl.drugsAvailable.errors?.required">
+      *Drugs Available number is required
+    </span>
+  </div>
+
+
+
+
+  <!-- <table class="table is-full" style="width:100%">
+    <thead>
+      <tr>
+        <th>SUPPLIER ID</th>
+        <th>NAME</th>
+        <th>EMAIL</th>
+        <th>CONTACT</th>
+        <th>DRUGS AVAILABLE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+        <td><input type="text" class="is-center input"  ngModel #supplierID="ngModel" name= "supplierID"  style="width: 100%;" placeholder="19283838" /></td>
+        <td><input type="text" class="is-center input"  ngModel #name="ngModel" name="name"  style="width: 100%;" placeholder="Mr S M Bandara" /></td>
+        <td><input type="text" class="is-center input"  ngModel #email="ngModel" name="email"  style="width: 100%;" placeholder="xxx@gmail.com" /></td>
+        <td><input type="text" class="is-center input"  ngModel #contact="ngModel" name="contact"  style="width: 100%;" placeholder="071xxxxxxx" /></td>
+        <td><input type="text" class="is-center input"  ngModel #drugsAvailable="ngModel" name="drugsAvailable"  style="width: 100%;" placeholder="Penadol, Dalcolax" /></td>
+
+      </tr>
+
+    </tbody>
+  </table> -->
+  <div class="panel-block" style="width: 100%;margin-top: 30px;">
+    <button class="button is-primary   is-fullwidth" type="submit">
+      Add
+    </button>
+  </div>
+</form>
+  </div>
+
+
+  <style>
+
+    .menu-list{
+      border-radius: 2px;
+      width: 220%;
+      display: block;
+      padding: 10px;
+      }
+      .btn{
+        width: 100%;
+        color:hsl(0, 0%, 21%);
+        background-color: hsl(0, 0%, 88%);
+        border-radius: 3px;
+      }
+      .newclass :hover{
+        background-color: hsl(0, 0%, 21%);
+        color: hsl(0, 0%, 88%);
+      }
+
+  </style>
+  <script>
+
+  </script>
+
+
+

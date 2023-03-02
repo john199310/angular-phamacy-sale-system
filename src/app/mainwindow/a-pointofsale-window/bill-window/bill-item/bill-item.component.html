@@ -1,0 +1,345 @@
+<div style="margin-top: 5%;height: 100%;">
+  <section class="section columns">
+    <div class="column is-full-desktop is-full-mobile">
+
+
+    <!-- <app-add-to-bill></app-add-to-bill> -->
+
+    <section class="panel">
+        <p class="panel-heading" style="background-color:hsl(0, 0%, 88%) ;color:hsl(0, 0%, 21%)">
+          Search Drugs
+        </p>
+        <div class="panel-block ">
+          <div  style="height: 50px; width: 100%;">
+
+            <div class="field has-addons is-full" >
+              <div class="control is-full" style="width: 100%;">
+                <input class="input" type="text" placeholder="Find drugs" [(ngModel)]="searchTerm">
+              </div>
+              <div class="control">
+                <a class="button is-primary">
+                  Search
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="slides-wrapper" ng2-carouselamos style="height: 400px;"
+        [items]="items"
+        [width]="1300"
+        [$prev]="prev"
+        [$next]="next"
+        [$item]="item"
+        ></div>
+
+
+
+      <ng-template #prev>
+        <i class="fas fa-chevron-circle-left fa-5x" ></i>
+      </ng-template>
+
+      <ng-template #next>
+        <i class="fas fa-chevron-circle-right fa-5x"></i>
+      </ng-template>
+
+      <ng-template #item >
+
+
+        <div  style="height:470px;" *ngFor="let inventory of inventorys | inventoryFilter: searchTerm">
+          <div class="column is-3-tablet is-6-mobile" style="width: 100%;" >
+            <div >
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-4by3 shadowp" >
+                  <img [src]="inventory.imagePath" [alt]="inventory.name" >
+                </figure>
+              </div>
+              <form (submit)="onAddToBill(inventory.id, inventory.name,inventory.expireDate,inventory.price,quantityForm, inventory.quantity)" #quantityForm="ngForm">
+              <div class="card-content">
+                <header class="card-header">
+                  <p class="card-header-title">
+                    {{ inventory.name }}
+                  </p>
+
+                </header>
+
+                <div class="card-content ">
+                  <p class="is-left">{{ inventory.price }}</p>
+                  <input type="number" class="is-center"  style="width: 50%;" name="quantityNumber" ngModel #quantityNumberInput="ngModel"/>
+                </div>
+
+                <footer class="card-footer">
+
+                  <button class="button btn is-primary is-rounded is-small-mobile  is-focused " style="margin-left: 50%;" (click)="onAddToBill(inventory.id, inventory.name,inventory.expireDate,inventory.price)">Add to Bill</button>
+
+                </footer>
+              </div>
+            </form>
+            </div>
+
+
+           </div>
+         </div>
+        </div>
+      </ng-template>
+    </section>
+
+    </div>
+  </section>
+
+
+  <section class="section columns is-centered" style="margin-top: -4%;">
+    <div class="column is-three-quarters is-full-mobile">
+      <!-- <app-bill-window></app-bill-window> -->
+
+      <section class="panel">
+        <form (submit)="onAddToCheckout(itemArray,billForm)" #billForm="ngForm">
+        <p class="panel-heading" style="background-color:hsl(0, 0%, 88%) ;color:hsl(0, 0%, 21%)">
+          Bill
+        </p>
+        <div class="panel-block ">
+          <div  style="height: 300px; width: 100%;">
+
+            <div style="overflow-y:auto ;overflow-x: hidden;height: 300px;">
+              <table class="table is-full" style="width:100%">
+                <thead >
+                  <tr>
+                    <th>NAME</th>
+                    <th>ID</th>
+                    <th>QUANTITY</th>
+                    <th>EXPIRE DATE</th>
+                    <th>PRICE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let entries of itemArray">
+
+                    <td >{{entries[1]}}</td>
+                    <td >{{entries[0]}}</td>
+                    <td >{{entries[4]}}</td>
+                    <td >{{entries[2]}}</td>
+                    <td >{{entries[3]}}</td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+        <div class="panel-block">
+          <button class="button is-primary   is-fullwidth"  type="submit" >
+            Check Out
+          </button>
+        </div>
+      </form>
+      </section>
+
+
+    </div>
+    <div class="column is-one-quarter is-full-mobile">
+
+
+      <!-- <app-check-out-window></app-check-out-window> -->
+
+  <section class="panel">
+        <p class="panel-heading" style="background-color:hsl(0, 0%, 88%) ;color:hsl(0, 0%, 21%)">
+          Check Out
+        </p>
+      <form (submit)="onPrintBill(total,billForm,dataArray)" #billForm="ngForm">
+        <div class="panel-block ">
+          <div  style="height: 300px; width: 100%;">
+            <br>
+            <div class="field has-addons">
+              <div class="control" style="margin-right: 20%;padding-top: 3%;">
+                <label class="label">Total : </label>
+              </div>
+              <div class="control" style="padding-top: 3%;">
+                <label class="label">{{total}}</label>
+              </div>
+            </div>
+            <br>
+
+
+
+            <div class="field has-addons">
+              <div class="control" style="margin-right: 23%;padding-top: 3%;">
+                <label class="label">Tax: </label>
+              </div>
+              <div class="control">
+                <input class="input" type="text" placeholder="Enter amount" name="tax" ngModel #taxInput="ngModel">
+              </div>
+            </div>
+            <br>
+            <div class="field has-addons">
+              <div class="control" style="margin-right: 0%;padding-top: 0%;">
+                <label class="label">Paid Amount :</label>
+              </div>
+              <div class="control">
+                <input class="input" type="text" placeholder="Enter amount" name="paidAmount" ngModel #paidAmountInput="ngModel">
+              </div>
+            </div>
+            <br>
+            <div class="field has-addons">
+              <div class="control" style="margin-right: 15%;padding-top: 3%;">
+                <label class="label">Balance :</label>
+              </div>
+              <div class="control" style="padding-top: 3%;">
+                <label class="label">{{balance}}  </label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="panel-block">
+          <button class="button is-primary   is-fullwidth"  type="submit" >
+            Get Balance
+          </button>
+          <button class="button is-primary   is-fullwidth"  (click)="print()">
+            Print Bill
+          </button>
+        </div>
+      </form>
+    </section>
+
+    </div>
+  </section>
+</div>
+
+<div id="print-section">
+  <div  style="height: 300px; width: 100%;">
+    <br>
+    <div class="field has-addons">
+      <div class="control" style="margin-right: 20%;padding-top: 3%;">
+        <label class="label">Total : {{total}}</label>
+      </div>
+
+    </div>
+    <br>
+
+    <div class="field has-addons">
+      <div class="control" style="margin-right: 23%;padding-top: 3%;">
+        <label class="label">Tax:       {{tax}}</label>
+      </div>
+
+    </div>
+    <br>
+    <div class="field has-addons">
+      <div class="control" style="margin-right: 0%;padding-top: 0%;">
+        <label class="label">Paid Amount :   {{paidAmount}}</label>
+      </div>
+
+    </div>
+    <br>
+    <div class="field has-addons">
+      <div class="control" style="margin-right: 15%;padding-top: 3%;">
+        <label class="label">Balance :   {{balance}}</label>
+      </div>
+
+    </div>
+
+    <br>
+    <div class="field has-addons">
+      <div class="control" style="margin-right: 15%;padding-top: 3%;">
+        <label class="label">Items :</label>
+      </div>
+      <div class="control" style="padding-top: 3%;">
+        <label class="label">{{dataArray[0]}}  </label><br>
+        <label class="label">{{dataArray[1]}}  </label><br>
+        <label class="label">{{dataArray[1]}}  </label><br>
+        <label class="label">{{dataArray[2]}}  </label><br>
+        <label class="label">{{dataArray[3]}}  </label><br>
+        <label class="label">{{dataArray[4]}}  </label><br>
+        <label class="label">{{dataArray[5]}}  </label><br>
+        <label class="label">{{dataArray[6]}}  </label><br>
+        <label class="label">{{dataArray[7]}}  </label><br>
+        <label class="label">{{dataArray[8]}}  </label><br>
+        <label class="label">{{dataArray[9]}}  </label><br>
+        <label class="label">{{dataArray[10]}}  </label><br>
+        <label class="label">{{dataArray[11]}}  </label><br>
+        <label class="label">{{dataArray[12]}}  </label><br>
+        <label class="label">{{dataArray[13]}}  </label><br>
+        <label class="label">{{dataArray[14]}}  </label><br>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+<script src="../../../../../../node_modules/flickity/dist/flickity.pkgd.min.js"></script>
+
+
+
+
+
+
+
+
+
+  <style>
+
+    .menu-list{
+      border-radius: 2px;
+      width: 220%;
+      display: block;
+      padding: 10px;
+      }
+      .btn{
+        width: 100%;
+        color:hsl(0, 0%, 21%);
+        background-color: hsl(0, 0%, 88%);
+        border-radius: 3px;
+      }
+      .newclass :hover{
+        background-color: hsl(0, 0%, 21%);
+        color: hsl(0, 0%, 88%);
+      }
+
+
+
+      /* external css: flickity.css */
+
+*{
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body { font-family: sans-serif; }
+
+.gallery {
+  background: #EEE;
+}
+
+.gallery-cell {
+  width: 66%;
+  height: 200px;
+  margin-right: 10px;
+  background: #8C8;
+  counter-increment:gallery-cell;
+}
+
+/* cell number */
+.gallery-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(gallery-cell);
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
+
+  </style>
+
+
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+

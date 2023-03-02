@@ -1,0 +1,157 @@
+<div style="overflow-y:auto ;overflow-x: hidden;height: 667px;">
+
+  <div class="spinner-box loadCenter" *ngIf="isLoading">
+    <div class="configure-border-1">
+      <div class="configure-core"></div>
+    </div>
+    <div class="configure-border-2">
+      <div class="configure-core"></div>
+    </div>
+  </div>
+
+
+  <form [formGroup]="form" (submit)="onAddInventory()"  *ngIf="!isLoading">
+
+    <div class="field">
+      <label class="label" >SUPPLIER'S EMAIL</label>
+      <input type="email" class="is-center input" #emailInput  formControlName="email"  style="width: 100%;" placeholder="bandara@gmail.com"  >
+      <p class="login-error" *ngIf="!emailInput.valid && emailInput.touched">Please enter valid email</p>
+    </div>
+
+    <div class="field">
+      <label class="label" >DRUG NAME</label>
+      <input type="text" class="is-center input" #nameInput  formControlName="name"  style="width: 100%;" placeholder="Amoxilin"  >
+      <p class="login-error" *ngIf="!nameInput.valid && nameInput.touched">Please enter the drug name</p>
+    </div>
+
+    <div class="field">
+      <label class="label" >QUANTITY</label>
+      <input type="text" class="is-center input" formControlName="quantity"   style="width: 100%;" placeholder="100" />
+    </div>
+
+    <div class="field">
+      <label class="label" >BATCH ID</label>
+      <input type="text" class="is-center input"  formControlName="batchId"  style="width: 100%;" placeholder="AA0000" />
+    </div>
+
+    <div class="field">
+      <label class="label">EXPIRE DATE</label>
+      <input  type="date" class="is-center input" formControlName="expireDate"  style="width: 100%;" placeholder="071xxxxxxx" />
+    </div>
+
+    <div class="field">
+      <label class="label">PRICE </label>
+      <input type="text" class="is-center input" formControlName="price"  style="width: 100%;" placeholder="Rs. 0000" />
+    </div>
+
+    <div class="field">
+      <label class="label">DRUG IMAGE</label>
+      <div class="file has-name is-full">
+        <label class="file-label">
+          <button class="file-input" type="button" name="resume" (click)=filePicker.click()></button>
+          <input class="file-input" type="file" #filePicker (change)="onImagePicked($event)">
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fa fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Choose Image
+            </span>
+          </span>
+          <span class="file-name is-full" style="width: 900px;">
+            Screen Shot
+          </span>
+        </label>
+      </div>
+      <div class="image-preview" *ngIf=" imagePreview !== '' && imagePreview && form.get('image').valid">
+        <img [src]="imagePreview" [alt]="form.value.name">
+      </div>
+    </div>
+
+
+
+    <div class="panel-block" style="width: 100%;margin-top: 30px;">
+      <button class="button is-primary   is-fullwidth" type="submit">
+        Add
+      </button>
+    </div>
+  </form>
+
+  <!-- <table class="table is-full" style="width:100%">
+    <thead>
+      <tr>
+        <th class="is-center">DRUG ID</th>
+        <th>NAME</th>
+        <th>QUANTITY</th>
+        <th>BATCH ID</th>
+        <th>EXPIRE DATE</th>
+        <th>DRUG IMAGE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+        <td><input type="text" class="is-center input" id="text"  style="width: 100%;" placeholder="19283838" /></td>
+        <td><input type="text" class="is-center input" id="text"  style="width: 100%;" placeholder="Panedol" /></td>
+        <td><input type="text" class="is-center input" id="text"  style="width: 100%;" placeholder="15 units" /></td>
+        <td><input type="text" class="is-center input" id="text"  style="width: 100%;" placeholder="B872178" /></td>
+        <td><input type="text" class="is-center input" id="text"  style="width: 100%;" placeholder="12/03/2020" /></td>
+        <td>
+          <div class="file has-name is-right">
+          <label class="file-label">
+            <input class="file-input" type="file" name="resume">
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fa fa-upload"></i>
+              </span>
+              <span class="file-label">
+                Choose Image
+              </span>
+            </span>
+            <span class="file-name">
+              Screen Shot
+            </span>
+          </label>
+        </div>
+      </td>
+      </tr>
+
+    </tbody>
+  </table> -->
+
+
+
+  </div>
+
+  <script src="https://raw.githack.com/Wikiki/bulma-calendar/master/dist/js/bulma-calendar.min.js"></script>
+  <script>
+    var options = {
+      dateFormat: "DD.MM.YYYY",
+      isRange: true
+    };
+    bulmaCalendar.attach('[type="date"]', options);
+  </script>
+  <style>
+
+    .menu-list{
+      border-radius: 2px;
+      width: 220%;
+      display: block;
+      padding: 10px;
+      }
+      .btn{
+        width: 100%;
+        color:hsl(0, 0%, 21%);
+        background-color: hsl(0, 0%, 88%);
+        border-radius: 3px;
+      }
+      .newclass :hover{
+        background-color: hsl(0, 0%, 21%);
+        color: hsl(0, 0%, 88%);
+      }
+
+  </style>
+  <script>
+
+  </script>
+

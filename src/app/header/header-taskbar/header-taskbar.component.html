@@ -1,0 +1,32 @@
+<!-- includes the log out button , search bar , and time -->
+<div class="navbar-end level-right" >
+  <div class="navbar-item level-item">
+
+    <div class="navbar-item">
+      <p class="control has-icons-left">
+        <input class="input" type="text" placeholder="Search">
+        <span class="icon is-left">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </span>
+      </p>
+    </div>
+
+
+    <div class="buttons">
+      <button class="button is-light" routerLink="/doctorLogin">
+        Search
+      </button>
+      <button *ngIf="!userIsAuthenticated" class="button is-primary"  routerLink="/login">
+        <strong>Log in as Admin</strong>
+      </button>
+      <button *ngIf="userIsAuthenticated" class="button is-primary" (click)="onLogout()" >
+        <strong>Log out</strong>
+      </button>
+      <button *ngIf="PharamacistRole" class="button is-primary is-rounded"  >
+        <strong><span class="icon"><i class="fa fa-cogs fa-lg "  routerLink="/settings"></i></span></strong>
+      </button>
+    </div>
+
+
+  </div>
+</div>
